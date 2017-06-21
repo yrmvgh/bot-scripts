@@ -1,0 +1,38 @@
+#!/bin/bash
+
+jarname="FredBoat-1.0.jar"
+discordircname="discordirc.json"
+rroguebotname="rroguebot.pl"
+tailname="logs/bot-"
+
+for i in `pidof java`
+do
+  if cat /proc/$i/cmdline | grep -q "$jarname"
+  then
+    kill $i
+  fi
+done
+
+for i in `pidof node`
+do
+  if cat /proc/$i/cmdline | grep -q "$discordircname"
+  then
+    kill $i
+  fi
+done
+
+for i in `pidof perl`
+do
+  if cat /proc/$i/cmdline | grep -q "$rroguebotname"
+  then
+    kill $i
+  fi
+done
+
+for i in `pidof tail`
+do
+  if cat /proc/$i/cmdline | grep -q "$tailname"
+  then
+    kill $i
+  fi
+done

@@ -1,0 +1,68 @@
+#!/bin/bash
+
+jarname="FredBoat-1.0.jar"
+discordircname="discordirc.json"
+rroguebotname="rroguebot.pl"
+tailname="logs/bot-"
+
+localp="/home/sour/Bins"
+
+javavar=0
+perlvar=0
+nodevar=0
+
+for i in `pidof java`
+do
+  if cat /proc/$i/cmdline | grep -q "$jarname" 
+  then
+    javavar=1
+  fi
+done
+
+if [ $javavar -eq 0 ]
+then
+  cd $localp
+  cd fredbot
+  rm logs/*
+  java -jar -Xmx128m $jarname &
+fi
+
+for i in `pidof node`
+do
+  if cat /proc/$i/cmdline | grep -q "$discordircname"
+  then
+    nodevar=1
+  fi
+done
+
+if [ $nodevar -eq 0 ]
+then
+  cd /home/sour/Repos/discord-irc
+  rm *.log*
+  npm start -- --config /home/sour/Documents/discordirc.json &
+fi
+
+for i in `pidof perl`
+do
+  if cat /proc/$i/cmdline | grep -q "$rroguebotname"
+  then
+    perlvar=1
+  fi
+done
+
+if [ $perlvar -eq 0 ]
+then
+  for i in `pidof tail`
+  do
+    if cat /proc/$i/cmdline | grep -q "$tailname"
+    then
+      kill $i
+    fi
+  done
+
+  cd $localp
+  cd rroguebot
+  rm logs/*
+  cd bin
+  ./boot-bot &
+fi

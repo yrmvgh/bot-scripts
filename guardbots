@@ -1,0 +1,30 @@
+#!/bin/bash
+
+discordircname="discordirc.json"
+rroguebotname="rroguebot.pl"
+tailname="logs/bot-"
+
+localp="/home/sour/Bins"
+
+
+for i in `pidof perl`
+do
+  if cat /proc/$i/cmdline | grep -q "$rroguebotname"
+  then
+    kill $i
+  fi
+done
+
+for i in `pidof tail`
+do
+  if cat /proc/$i/cmdline | grep -q "$tailname"
+  then
+    kill $i
+  fi
+done
+
+cd $localp
+cd rroguebot
+rm logs/*
+cd bin
+./boot-bot &

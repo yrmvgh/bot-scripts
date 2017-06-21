@@ -1,0 +1,54 @@
+#!/bin/bash
+
+jarname="FredBoat-1.0.jar"
+discordircname="discordirc.json"
+rroguebotname="rroguebot.pl"
+tailname="logs/bot-"
+
+echo
+
+echo "Total pids:" 
+echo `pidof java`
+for i in `pidof java`
+do
+  if cat /proc/$i/cmdline | grep -q "$jarname"
+  then
+    echo "Java for fredboat active"
+  fi
+done
+echo
+
+echo "Total pids(+npm):" 
+echo `pidof node`
+echo `pidof npm`
+for i in `pidof node`
+do
+  if cat /proc/$i/cmdline | grep -q "$discordircname"
+  then
+    echo "Node for discord-irc active"
+  fi
+done
+echo
+
+echo "Total pids:" 
+echo `pidof perl`
+for i in `pidof perl`
+do
+  if cat /proc/$i/cmdline | grep -q "$rroguebotname"
+  then
+    echo "Perl for rroguebot active"
+  fi
+done
+echo
+
+echo "Total pids:" 
+echo `pidof tail`
+for i in `pidof tail`
+do
+  if cat /proc/$i/cmdline | grep -q "$tailname"
+  then
+    echo "Tail for rroguebot active"
+  fi
+done
+
+echo
