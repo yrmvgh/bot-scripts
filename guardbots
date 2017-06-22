@@ -26,5 +26,5 @@ cd $localp
 cd rroguebot
 rm logs/*
 cd bin
-sleep 15
+sleep 10
 ./boot-bot &

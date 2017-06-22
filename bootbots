@@ -16,7 +16,6 @@ boot_rroguebot(){
   cd rroguebot
   rm logs/*
   cd bin
-  sleep 5
   ./boot-bot
 }
 
@@ -24,14 +23,12 @@ boot_fredboat(){
   cd $localp
   cd fredbot
   rm logs/*
-  sleep 5
   java -jar -Xmx128m $jarname
 }
 
 boot_discordirc(){
   cd /home/sour/Repos/discord-irc
   rm *.log*
-  sleep 5
   npm start -- --config /home/sour/Documents/discordirc.json
 }
 
