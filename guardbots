@@ -6,6 +6,8 @@ tailname="logs/bot-"
 
 localp="/home/sour/Bins"
 
+sleep 10
+
 for i in `pidof perl`
 do
   if cat /proc/$i/cmdline | grep -q "$rroguebotname"
@@ -26,5 +28,4 @@ cd $localp
 cd rroguebot
 rm logs/*
 cd bin
-sleep 10
 ./boot-bot &

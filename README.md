@@ -23,10 +23,10 @@ Also, due to how *rroguebot* works, a reset once every 12 hours would be necessa
 
 ```
 *  * * * * sh /path/to/bootbots
-*  3 * * * sh /path/to/guardbots
-*  9 * * * sh /path/to/guardbots
-* 15 * * * sh /path/to/guardbots
-* 21 * * * sh /path/to/guardbots
+0  3 * * * sh /path/to/guardbots
+0  9 * * * sh /path/to/guardbots
+0 15 * * * sh /path/to/guardbots
+0 21 * * * sh /path/to/guardbots
 ```
 
 And all your bots should always be checked if they're running, if not, be started, and your *rroguebot* should be restarted every 6 hours.
