@@ -11,6 +11,27 @@ javavar=0
 perlvar=0
 nodevar=0
 
+boot_rroguebot(){
+  cd $localp
+  cd rroguebot
+  rm logs/*
+  cd bin
+  ./boot-bot
+}
+
+boot_fredboat(){
+  cd $localp
+  cd fredbot
+  rm logs/*
+  java -jar -Xmx128m $jarname
+}
+
+boot_discordirc(){
+  cd /home/sour/Repos/discord-irc
+  rm *.log*
+  npm start -- --config /home/sour/Documents/discordirc.json
+}
+
 for i in `pidof java`
 do
   if cat /proc/$i/cmdline | grep -q "$jarname" 
@@ -21,10 +42,7 @@ done
 
 if [ $javavar -eq 0 ]
 then
-  cd $localp
-  cd fredbot
-  rm logs/*
-  java -jar -Xmx128m $jarname &
+  boot_fredboat &
 fi
 
 for i in `pidof node`
@@ -37,9 +55,7 @@ done
 
 if [ $nodevar -eq 0 ]
 then
-  cd /home/sour/Repos/discord-irc
-  rm *.log*
-  npm start -- --config /home/sour/Documents/discordirc.json &
+  boot_discordirc &
 fi
 
 for i in `pidof perl`
@@ -60,9 +76,5 @@ then
     fi
   done
 
-  cd $localp
-  cd rroguebot
-  rm logs/*
-  cd bin
-  ./boot-bot &
+  boot_rroguebot &
 fi
